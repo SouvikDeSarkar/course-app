@@ -5,6 +5,7 @@ import com.souvik.dto.CourseRequestDTO;
 import com.souvik.dto.CourseResponseDTO;
 import com.souvik.dto.ServiceResponse;
 import com.souvik.service.CourseService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class CourseController {
     }
 
     @PostMapping("/addCourse")
-    public ServiceResponse<CourseResponseDTO> addCourse(@RequestBody CourseRequestDTO courseRequestDTO){
+    public ServiceResponse<CourseResponseDTO> addCourse(@RequestBody @Valid CourseRequestDTO courseRequestDTO){
         CourseResponseDTO course1 = courseService.onboardNewCourse(courseRequestDTO);
         return new ServiceResponse<CourseResponseDTO>(HttpStatus.CREATED, course1);
     }

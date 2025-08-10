@@ -1,6 +1,8 @@
 package com.souvik.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.souvik.annotation.CourseTypeValidation;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,15 +15,26 @@ import java.util.Date;
 public class CourseRequestDTO {
 
 
+    @NotBlank(message = "Course name should not be empty")
     private String courseName;
+    @NotEmpty(message = "Trainer name should be always defined")
     private String trainerName;
+    @NotNull(message = "Duration must be specified")
     private String duration; //days
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+    @Past(message = "Start date can not be before current date")
     private Date startDate;
+    @CourseTypeValidation
     private String courseType; //live or recording
+    @Min(value = 1500, message = "course price can not be less than 1500")
+    @Max(value = 10000, message = "course price can not exceed 10000")
     private double fees;
     private boolean isCertificateAvailable;
+    @NotEmpty(message = "Description must be present")
     private String description;
+    @Email(message = "Invalid Email id")
     private String email;
+    @Pattern(regexp = "^[0-9]{10}$")
     private String contact;
 
     public String getEmail() {

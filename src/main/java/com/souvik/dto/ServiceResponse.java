@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
+
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,6 +14,16 @@ public class ServiceResponse<T> {
 
     private HttpStatus status;
     private T response;
+    private ErrorDTO error;
+
+
+    public ErrorDTO getError() {
+        return error;
+    }
+
+    public void setError(ErrorDTO error) {
+        this.error = error;
+    }
 
     public ServiceResponse(HttpStatus status, T response) {
         this.status = status;
@@ -32,4 +45,8 @@ public class ServiceResponse<T> {
     public void setResponse(T response) {
         this.response = response;
     }
+
+    public void setError(List<ErrorDTO> errorDTOList) {
+    }
+
 }
