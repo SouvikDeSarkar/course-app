@@ -1,30 +1,47 @@
-package com.souvik.dto;
+package com.souvik.entity;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
-public class Course {
 
+@Entity
+@Table(name = "COURSE_TBL")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CourseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int courseId;
     private String courseName;
     private String trainerName;
-    private String duration; //days
+    private String duration;
     private Date startDate;
-    private String courseType; //live or recording
+    private String courseType;
     private double fees;
     private boolean isCertificateAvailable;
+    private String description;
+    private String email;
+    private String contact;
 
-    public Course() {
+    public String getEmail() {
+        return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public Course(int courseId, String courseName, String trainerName, String duration, Date startDate, String courseType, double fees, boolean isCertificateAvailable) {
-        this.courseId = courseId;
-        this.courseName = courseName;
-        this.trainerName = trainerName;
-        this.duration = duration;
-        this.startDate = startDate;
-        this.courseType = courseType;
-        this.fees = fees;
-        this.isCertificateAvailable = isCertificateAvailable;
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public int getCourseId() {
@@ -89,5 +106,13 @@ public class Course {
 
     public void setCertificateAvailable(boolean certificateAvailable) {
         isCertificateAvailable = certificateAvailable;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
